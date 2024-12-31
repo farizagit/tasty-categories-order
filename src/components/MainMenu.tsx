@@ -6,13 +6,17 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, Home, Info, Truck, Phone, Book, Gift, Star } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const menuItems = [
-  { name: "Главная", href: "/" },
-  { name: "О нас", href: "/about" },
-  { name: "Доставка", href: "/delivery" },
-  { name: "Контакты", href: "/contacts" },
+  { name: "Главная", href: "/", icon: Home },
+  { name: "О нас", href: "/about", icon: Info },
+  { name: "Доставка", href: "/delivery", icon: Truck },
+  { name: "Контакты", href: "/contacts", icon: Phone },
+  { name: "Акции", href: "/promotions", icon: Gift },
+  { name: "Бронирование", href: "/booking", icon: Book },
+  { name: "Избранное", href: "/favorites", icon: Star },
 ];
 
 export const MainMenu = () => {
@@ -28,16 +32,20 @@ export const MainMenu = () => {
           <SheetTitle>Меню</SheetTitle>
         </SheetHeader>
         <div className="flex flex-col space-y-4 mt-8">
-          {menuItems.map((item) => (
-            <Button
-              key={item.href}
-              variant="ghost"
-              className="justify-start text-lg"
-              onClick={() => window.location.href = item.href}
-            >
-              {item.name}
-            </Button>
-          ))}
+          {menuItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Link key={item.href} to={item.href}>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start text-lg"
+                >
+                  <Icon className="mr-2 h-5 w-5" />
+                  {item.name}
+                </Button>
+              </Link>
+            );
+          })}
         </div>
       </SheetContent>
     </Sheet>
