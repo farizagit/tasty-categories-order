@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { DishCard } from "@/components/DishCard";
 import { Categories } from "@/components/Categories";
-import { ShoppingCart, User, Menu, CreditCard } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { MainMenu } from "@/components/MainMenu";
+import { UserProfile } from "@/components/UserProfile";
+import { ShoppingCartDialog } from "@/components/ShoppingCartDialog";
+import { PaymentDialog } from "@/components/PaymentDialog";
 
 const categories = [
   { id: "all", name: "Все блюда", icon: "🍽️" },
@@ -65,32 +67,20 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-muted/30">
-      {/* Навигационная панель */}
       <nav className="bg-white shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6" />
-              </Button>
+              <MainMenu />
               <h1 className="text-2xl font-bold text-primary">
                 Tasty<span className="text-muted-foreground">Food</span>
               </h1>
             </div>
             
             <div className="flex items-center space-x-2">
-              <Button variant="ghost" size="icon" className="relative">
-                <User className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="icon" className="relative">
-                <ShoppingCart className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  0
-                </span>
-              </Button>
-              <Button variant="ghost" size="icon">
-                <CreditCard className="h-5 w-5" />
-              </Button>
+              <UserProfile />
+              <ShoppingCartDialog />
+              <PaymentDialog />
             </div>
           </div>
         </div>
