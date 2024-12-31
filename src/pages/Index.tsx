@@ -28,7 +28,30 @@ const dishes = [
     image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe",
     category: "salads",
   },
-  // Добавьте больше блюд по необходимости
+  {
+    id: "3",
+    name: "Борщ",
+    description: "Традиционный борщ со сметаной и чесночными пампушками",
+    price: 380,
+    image: "https://images.unsplash.com/photo-1594756202469-9ff9799b2e4e",
+    category: "soups",
+  },
+  {
+    id: "4",
+    name: "Тирамису",
+    description: "Классический итальянский десерт с кофейным вкусом",
+    price: 420,
+    image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9",
+    category: "desserts",
+  },
+  {
+    id: "5",
+    name: "Свежевыжатый апельсиновый сок",
+    description: "Натуральный сок из спелых апельсинов",
+    price: 250,
+    image: "https://images.unsplash.com/photo-1613478223719-2ab802602423",
+    category: "drinks",
+  },
 ];
 
 const Index = () => {

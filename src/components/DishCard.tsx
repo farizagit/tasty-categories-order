@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, Minus, ShoppingCart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface DishCardProps {
@@ -14,13 +14,25 @@ interface DishCardProps {
 
 export const DishCard = ({ id, name, description, price, image, category }: DishCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [quantity, setQuantity] = useState(0);
   const { toast } = useToast();
 
   const handleAddToCart = () => {
-    toast({
-      title: "Добавлено в корзину",
-      description: `${name} добавлено в вашу корзину`,
-    });
+    if (quantity > 0) {
+      toast({
+        title: "Добавлено в корзину",
+        description: `${name} (${quantity} шт.) добавлено в вашу корзину`,
+      });
+      setQuantity(0);
+    }
+  };
+
+  const incrementQuantity = () => {
+    setQuantity(prev => prev + 1);
+  };
+
+  const decrementQuantity = () => {
+    setQuantity(prev => Math.max(0, prev - 1));
   };
 
   return (
@@ -52,14 +64,37 @@ export const DishCard = ({ id, name, description, price, image, category }: Dish
           <span className="text-lg font-bold text-primary">
             {price.toLocaleString("ru-RU")} ₽
           </span>
-          <Button
-            onClick={handleAddToCart}
-            className="bg-primary hover:bg-primary/90 text-white"
-            size="sm"
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            В корзину
-          </Button>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
+              <Button
+                onClick={decrementQuantity}
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8"
+                disabled={quantity === 0}
+              >
+                <Minus className="w-4 h-4" />
+              </Button>
+              <span className="w-8 text-center">{quantity}</span>
+              <Button
+                onClick={incrementQuantity}
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8"
+              >
+                <Plus className="w-4 h-4" />
+              </Button>
+            </div>
+            <Button
+              onClick={handleAddToCart}
+              className="bg-primary hover:bg-primary/90 text-white"
+              size="sm"
+              disabled={quantity === 0}
+            >
+              <ShoppingCart className="w-4 h-4 mr-2" />
+              В корзину
+            </Button>
+          </div>
         </div>
       </div>
     </div>
